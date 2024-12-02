@@ -1,0 +1,2922 @@
+[
+    {
+        "id": "f6f2187d.f17ca8",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "3cc11d24.ff01a2",
+        "type": "comment",
+        "z": "f6f2187d.f17ca8",
+        "name": "WARNING: please check you have started this container with a volume that is mounted to /data\\n otherwise any flow changes are lost when you redeploy or upgrade the container\\n (e.g. upgrade to a more recent node-red docker image).\\n  If you are using named volumes you can ignore this warning.\\n Double click or see info side panel to learn how to start Node-RED in Docker to save your work",
+        "info": "\nTo start docker with a bind mount volume (-v option), for example:\n\n```\ndocker run -it -p 1880:1880 -v /home/user/node_red_data:/data --name mynodered nodered/node-red\n```\n\nwhere `/home/user/node_red_data` is a directory on your host machine where you want to store your flows.\n\nIf you do not do this then you can experiment and redploy flows, but if you restart or upgrade the container the flows will be disconnected and lost. \n\nThey will still exist in a hidden data volume, which can be recovered using standard docker techniques, but that is much more complex than just starting with a named volume as described above.",
+        "x": 350,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "5ae3787fcce37a14",
+        "type": "mqtt in",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "topic": "openwebrx/+",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "a3b175badaf0c377",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 190,
+        "y": 380,
+        "wires": [
+            [
+                "c7288f561e14fdd6"
+            ]
+        ]
+    },
+    {
+        "id": "c7288f561e14fdd6",
+        "type": "switch",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "openwebrx/RX",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "openwebrx/ISM",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "openwebrx/APRS",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "openwebrx/POCSAG",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "openwebrx/ACARS",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "openwebrx/VDL2",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 7,
+        "x": 350,
+        "y": 380,
+        "wires": [
+            [
+                "9e5865bb41863c10"
+            ],
+            [
+                "7b9653f676277712"
+            ],
+            [
+                "75b94eab3826fcb2"
+            ],
+            [
+                "b6407da8a191f2cd"
+            ],
+            [
+                "5fc09f566e5fe040",
+                "3d76d6ea5afba571"
+            ],
+            [
+                "18569788452b19c3"
+            ],
+            [
+                "5690a6ab98193c5f"
+            ]
+        ]
+    },
+    {
+        "id": "5690a6ab98193c5f",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "Other",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "9e5865bb41863c10",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "RX",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "b6407da8a191f2cd",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "POCSAG",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 580,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "18569788452b19c3",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "VDL2",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "5fc09f566e5fe040",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "ACARS",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 580,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "3d76d6ea5afba571",
+        "type": "switch",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "property": "payload.flight",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "null"
+            },
+            {
+                "t": "nnull"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 570,
+        "y": 680,
+        "wires": [
+            [
+                "7b3763ac78b826c6"
+            ],
+            [
+                "eb657ab3708283e3",
+                "815ecc9b769bd4da"
+            ]
+        ]
+    },
+    {
+        "id": "7b3763ac78b826c6",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "No Flight ID",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 790,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "eb657ab3708283e3",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "Flight ID",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.flight",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 780,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "5304cff46ba0135d",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "Add / Update ISM Data",
+        "func": "if (flow.get('ism_data') === undefined){flow.set('ism_data',[]);}\n\nlet ism_data_array = flow.get('ism_data');\n\n    let this_device_and_id = '';\n    if (msg.payload.id !== undefined){\n            this_device_and_id = msg.payload.model + '_' + msg.payload.id;\n        } else {\n            this_device_and_id = msg.payload.model;\n        }\n\n\n    let has_device_in_array = false;\n    for (let i = 0; i < ism_data_array.length; i++) {\n        if (ism_data_array[i].device_and_id === this_device_and_id){\n            ism_data_array[i].payload = msg.payload;\n            has_device_in_array = true;\n            msg.payload = 'Updated - ' + this_device_and_id;\n            }\n    } \n\n\n    if (!has_device_in_array){\n        let add_this_device = {};\n            add_this_device.device_and_id = this_device_and_id;\n            add_this_device.payload = msg.payload;\n        ism_data_array.push (add_this_device);\n        msg.payload = 'Added - ' + this_device_and_id;\n    }\n\n    flow.set('ism_data',ism_data_array);\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 860,
+        "y": 220,
+        "wires": [
+            [
+                "7e3ebae0f05cb487"
+            ]
+        ]
+    },
+    {
+        "id": "7b9653f676277712",
+        "type": "rbe",
+        "z": "f6f2187d.f17ca8",
+        "name": "ISM Filter",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 580,
+        "y": 240,
+        "wires": [
+            [
+                "5304cff46ba0135d"
+            ]
+        ]
+    },
+    {
+        "id": "7e3ebae0f05cb487",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "Sort And Output ISM Data",
+        "func": "let ism_data_array = flow.get('ism_data');\nif (ism_data_array === undefined){return;}\nif (ism_data_array.length === 0){return;}\n\n// Remove Old\nlet new_ism_data_array = [];\n    for (let i = 0; i < ism_data_array.length; i++) {\n      let this_timestamp = ((ism_data_array[i].payload.timestamp) / 1000);\n      delete ism_data_array[i].timestamp_diff;\n      delete ism_data_array[i].string;\n      let now_timestamp = Date.now() / 1000;\n      let timestamp_diff = now_timestamp - this_timestamp;\n      let temp_days_to_seconds = 86400 * 4;\n      let age_diff = parseInt(timestamp_diff) / temp_days_to_seconds;\n      ism_data_array[i].time_diff_string = secondsToDhms(timestamp_diff);\n      \n      if (age_diff <= 1){new_ism_data_array.push(ism_data_array[i]);}\n        \n      \n    } \nism_data_array = new_ism_data_array;\n\n// End Remove Old\n\n\nlet presort_array = [];\nlet resort_array = [];\nlet temp_id = '';\n    // Pull Timestamp From Orig. Array\n    for (let i = 0; i < ism_data_array.length; i++) {\n          temp_id = (ism_data_array[i].payload.timestamp) + '_' + (ism_data_array[i].payload.model);\n          presort_array.push (temp_id);\n    } \n\n    presort_array.sort();\n    presort_array.reverse();\n    \n    for (let i = 0; i < presort_array.length; i++) {        // Loop Timestamp Sorted Array\n    let match = false;\n      \n      for (let j = 0; j < ism_data_array.length; j++) {     // Loop Orig. Array And Match\n        if (!match){\n              let this_id = (ism_data_array[j].payload.timestamp) + '_' + (ism_data_array[j].payload.model);\n                    if (this_id === presort_array[i]){\n                      resort_array.push(ism_data_array[j]);\n                      match = true;\n                    }\n        }\n      }\n    } \n\n    msg.device_presort = presort_array;\n    msg.device_count_orig = ism_data_array.length;\n    msg.device_count_presort = presort_array.length;\n    msg.device_count_resort = resort_array.length;\n    \nmsg.payload = resort_array;\n\nreturn msg;\n\n\n\n\nfunction secondsToDhms(seconds) {\nseconds = Number(seconds);\nvar d = Math.floor(seconds / (3600*24));\nvar h = Math.floor(seconds % (3600*24) / 3600);\nvar m = Math.floor(seconds % 3600 / 60);\nvar s = Math.floor(seconds % 60);\n\nvar dDisplay = d > 0 ? d + (d == 1 ? \" day \" : \" days \") : \"\";\nvar hDisplay = h > 0 ? h + (h == 1 ? \" hour \" : \" hours \") : \"\";\nvar mDisplay = m > 0 ? m + (m == 1 ? \" min. \" : \" min. \") : \"\";\nvar sDisplay = s > 0 ? s + (s == 1 ? \" sec.\" : \" sec.\") : \"\";\nreturn dDisplay + hDisplay + mDisplay + sDisplay;\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 850,
+        "y": 260,
+        "wires": [
+            [
+                "205c7c193f39af29"
+            ]
+        ]
+    },
+    {
+        "id": "75b94eab3826fcb2",
+        "type": "rbe",
+        "z": "f6f2187d.f17ca8",
+        "name": "APRS Filter",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 590,
+        "y": 520,
+        "wires": [
+            [
+                "6e431578cb73e57f",
+                "b036c6f4c90c44d9",
+                "794f2c2dad879dc6",
+                "1809e84f64be8f97",
+                "50d670c19684f1ed"
+            ]
+        ]
+    },
+    {
+        "id": "6e431578cb73e57f",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "Station To Correct Flow Array",
+        "func": "\n    let msg_type = msg.payload.type;\n    let is_direct = false;\n    if (flow.get('aprs_' + msg_type) === undefined){flow.set('aprs_' + msg_type,[]);}\n\n    let aprs_list_array = flow.get('aprs_' + msg_type);\n    let this_aprs_station_id = '';\n    if (msg.payload.source !== undefined){ this_aprs_station_id = msg.payload.source; } else { this_aprs_station_id = 'Unknown'; }\n\n\n    let has_device_in_array = false;\n    for (let i = 0; i < aprs_list_array.length; i++) {\n        if (aprs_list_array[i].source === this_aprs_station_id){                            // Update Station\n            \n            //(aprs_list_array[i].last_heard).push (Date.now());\n            aprs_list_array[i].last_heard = Date.now();\n            aprs_list_array[i].daily_count++;\n\n            if (msg.payload.lat !== undefined){msg.payload.lat = (msg.payload.lat).toFixed(4);}\n            if (msg.payload.lon !== undefined){msg.payload.lon = (msg.payload.lon).toFixed(4);}\n\n            aprs_list_array[i].payload = msg.payload;\n            aprs_list_array[i].payload.raw = '';                                            // Remove Unneeded RAW Data\n            has_device_in_array = true;\n                    if ((msg.payload.path).length === 0){is_direct = true;}\n                    msg.payload = 'Updated - ' + this_aprs_station_id  + ' - ' + msg_type;\n                    if (is_direct){msg.payload += ' *DIRECT*';}\n            }\n    } \n\n\n    if (!has_device_in_array){\n        let add_this_device = {};\n            add_this_device.source = this_aprs_station_id;                                  // Add New Station\n            //add_this_device.last_heard = [];\n            //(add_this_device.last_heard).push (Date.now());\n            add_this_device.last_heard =Date.now();\n            add_this_device.daily_count = 1;\n\n            if (msg.payload.lat !== undefined){msg.payload.lat = (msg.payload.lat).toFixed(4);}\n            if (msg.payload.lon !== undefined){msg.payload.lon = (msg.payload.lon).toFixed(4);}\n            \n            add_this_device.payload = msg.payload;     \n            add_this_device.payload.raw = '';                                               // Remove Unneeded RAW Data\n        aprs_list_array.push (add_this_device);\n                if ((msg.payload.path).length === 0){is_direct = true;}\n                msg.payload = 'Added - ' + this_aprs_station_id + ' - ' + msg_type;\n                if (is_direct){msg.payload += ' *DIRECT*';}\n    }\n\n    flow.set('aprs_' +msg_type,aprs_list_array);\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 930,
+        "y": 500,
+        "wires": [
+            [
+                "8ba9fdde9227b020"
+            ]
+        ]
+    },
+    {
+        "id": "8ba9fdde9227b020",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "debug 6",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1180,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "b036c6f4c90c44d9",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "Station To Direct Array",
+        "func": "\n// This sections add the last node station in the path to the flow array;\n// Just in case there is no path, such as heard directly, the last heard\n// node station is automatically populated with the Source call to start with.\n\n\n    let last_path = msg.payload.path;\n    let last_path_station = msg.payload.source; // Save sender in case heard directly\n    let is_new_last_path = false;\n\n    if (flow.get('aprs_heard_direct') === undefined){flow.set('aprs_heard_direct',[]);}\n    let aprs_direct_list_array = flow.get('aprs_heard_direct');\n    \n    \n    if (msg.payload.path !== undefined){\n            for (let i = 0; i < last_path.length; i++) { \n                let check_this = last_path[i];\n                    check_this = check_this.replace(\"*\", \"\");\n                if (!check_this.includes(\"WIDE\")){ last_path_station = check_this;}\n            }\n    \n                if (!aprs_direct_list_array.includes(last_path_station)){\n                    aprs_direct_list_array.push (last_path_station);\n                    is_new_last_path = true;\n                    flow.set('aprs_heard_direct',aprs_direct_list_array);\n                }\n    }\n\n    \n\n//    msg.payload = {};\n//    msg.payload.last_route_array = last_path;\n//    msg.payload.last_route_string = last_path.toString();\n//    msg.payload.last_path_endpoint_station = last_path_station;\n\n  msg.payload = 'New Station Path Heard -> ' + last_path_station;\n    \nif (is_new_last_path){return msg;} else {return;}       // Only send message if new path",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 900,
+        "y": 540,
+        "wires": [
+            [
+                "96d5656b9cc18e9b"
+            ]
+        ]
+    },
+    {
+        "id": "96d5656b9cc18e9b",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "debug 8",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1180,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "e9569d0e92aeb2e0",
+        "type": "ui-chart",
+        "z": "f6f2187d.f17ca8",
+        "group": "48246e60360de97d",
+        "name": "",
+        "label": "APRS Messages Per Minute",
+        "order": 2,
+        "chartType": "line",
+        "category": "topic",
+        "categoryType": "msg",
+        "xAxisLabel": "",
+        "xAxisProperty": "",
+        "xAxisPropertyType": "timestamp",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "HH:mm",
+        "xmin": "0",
+        "xmax": "100",
+        "yAxisLabel": "",
+        "yAxisProperty": "payload",
+        "yAxisPropertyType": "msg",
+        "ymin": "0",
+        "ymax": "",
+        "bins": 10,
+        "action": "append",
+        "stackSeries": false,
+        "pointShape": "circle",
+        "pointRadius": "2",
+        "showLegend": false,
+        "removeOlder": "24",
+        "removeOlderUnit": "3600",
+        "removeOlderPoints": "",
+        "colors": [
+            "#0095ff",
+            "#ff0000",
+            "#ff7f0e",
+            "#2ca02c",
+            "#a347e1",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#666666"
+        ],
+        "textColorDefault": true,
+        "gridColor": [
+            "#e5e5e5"
+        ],
+        "gridColorDefault": true,
+        "width": "12",
+        "height": "6",
+        "className": "",
+        "interpolation": "linear",
+        "x": 1240,
+        "y": 580,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "794f2c2dad879dc6",
+        "type": "Message Counter",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "units": "minutes",
+        "interval": "1",
+        "alignToClock": true,
+        "generator": "internal",
+        "x": 890,
+        "y": 580,
+        "wires": [
+            [
+                "e9569d0e92aeb2e0"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "0ca784caae8fb8b9",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "Sort Array",
+        "func": "let msg_type = msg.payload.type\nlet bulk_calls = flow.get('aprs_' + msg_type);\nlet presort_array = [];\nlet callsign_sort = [];\n\nif (bulk_calls === undefined){return;}  // Skip if no stations heard for this type\n\n// Push Timestamps to Array to be sorted\nfor (let i = 0; i < bulk_calls.length; i++) { let sort = bulk_calls[i].last_heard; presort_array.push(sort);}\n//\n\npresort_array.sort();\n\nfor (let i = 0; i < presort_array.length; i++) { \n    let find_this = presort_array[i];\n\n        for (let j = 0; j < bulk_calls.length; j++) {\n            let bulk_last_heard = bulk_calls[j].last_heard;\n\n            if (parseInt(bulk_last_heard) === parseInt(find_this)){\n                let create = {};\n                    create.callsign = bulk_calls[j].source;\n                    create.last_heard = bulk_last_heard;\n                    create.last_payload = bulk_calls[j].payload;\n                    create.daily_count = bulk_calls[j].daily_count;\n                    if (create.last_payload.type !== undefined){create.last_payload.type = bulk_calls[j].payload.type.toUpperCase();}\n                    if ((create.last_payload.path).length === 0){create.last_payload.path = 'Direct';} else {create.last_payload.path = (create.last_payload.path).toString();}\n                callsign_sort.push (create);\n            }\n        }\n}\n\n//if (flow.get('aprs_' + msg_type + '_sorted') === undefined){flow.set('aprs_' + msg_type + '_sorted',[]);}\n//flow.set('aprs_' + msg_type + '_sorted',callsign_sort);\n\nmsg.payload = callsign_sort;\nmsg.payload_type = msg_type;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 1140,
+        "wires": [
+            [
+                "014e5aa1ae4f9152"
+            ]
+        ]
+    },
+    {
+        "id": "45c5c655a722cab6",
+        "type": "ui-table",
+        "z": "f6f2187d.f17ca8",
+        "group": "72fcbdd61d0961be",
+        "name": "Standard Packets",
+        "label": "text",
+        "order": 1,
+        "width": "12",
+        "height": "1",
+        "maxrows": "10",
+        "passthru": false,
+        "autocols": false,
+        "showSearch": false,
+        "selectionType": "none",
+        "columns": [
+            {
+                "title": "Sender",
+                "key": "callsign",
+                "keyType": "key",
+                "type": "text",
+                "width": "30px",
+                "align": "start"
+            },
+            {
+                "title": "Last Heard",
+                "key": "last_heard",
+                "keyType": "key",
+                "type": "text",
+                "width": "260px",
+                "align": "start"
+            },
+            {
+                "title": "Comment",
+                "key": "last_payload.comment",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "start"
+            },
+            {
+                "title": "Latitude",
+                "key": "last_payload.lat",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "start"
+            },
+            {
+                "title": "Longitude",
+                "key": "last_payload.lon",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "start"
+            },
+            {
+                "title": "Path",
+                "key": "last_payload.path",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "start"
+            },
+            {
+                "title": "Packet Type",
+                "key": "last_payload.type",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "start"
+            },
+            {
+                "title": "Received Count",
+                "key": "daily_count",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "start"
+            }
+        ],
+        "mobileBreakpoint": "sm",
+        "mobileBreakpointType": "defaults",
+        "action": "replace",
+        "x": 970,
+        "y": 1140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "87d8a1f90b5d582d",
+        "type": "switch",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "property": "payload_type",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Mic-E",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "compressed",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "message",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "object",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "regular",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "status",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "thirdparty",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "undefined",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "last_heard",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 9,
+        "x": 710,
+        "y": 1140,
+        "wires": [
+            [
+                "9bb516a32777a774"
+            ],
+            [
+                "4db90f74bf35e0b4"
+            ],
+            [
+                "a1c3093ea2c03919"
+            ],
+            [
+                "ef2803db860f9754"
+            ],
+            [
+                "45c5c655a722cab6"
+            ],
+            [
+                "662570d17fc86868"
+            ],
+            [
+                "128559ac8f0f03b4"
+            ],
+            [
+                "6a176cca42f6e7c2"
+            ],
+            [
+                "ae1e29b0854ac99c"
+            ]
+        ]
+    },
+    {
+        "id": "014e5aa1ae4f9152",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "AGE Function",
+        "func": "let modify_array = msg.payload;\n\nfor (let i = 0; i < modify_array.length; i++) { \n    \n    let this_epoch = modify_array[i].last_heard;\n    const d = new Date();\n    let time_now = d.getTime();\n\n    let this_age_seconds = (time_now - this_epoch) / 1000;\n    let datetext = secondsToDhms(this_age_seconds);\n\n    modify_array[i].last_heard = datetext;\n}\n\nmsg.payload = modify_array.reverse();\n\n//msg.payload = modify_array;\nreturn msg;\n\n\n\nfunction secondsToDhms(seconds) {\nseconds = Number(seconds);\nvar d = Math.floor(seconds / (3600*24));\nvar h = Math.floor(seconds % (3600*24) / 3600);\nvar m = Math.floor(seconds % 3600 / 60);\nvar s = Math.floor(seconds % 60);\n\nvar dDisplay = d > 0 ? d + (d == 1 ? \" day \" : \" days \") : \"\";\nvar hDisplay = h > 0 ? h + (h == 1 ? \" hour \" : \" hours \") : \"\";\nvar mDisplay = m > 0 ? m + (m == 1 ? \" min. \" : \" min. \") : \"\";\nvar sDisplay = s > 0 ? s + (s == 1 ? \" sec.\" : \" sec.\") : \"\";\nreturn dDisplay + hDisplay + mDisplay + sDisplay;\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 1180,
+        "wires": [
+            [
+                "e8480b9f2eed06b2",
+                "87d8a1f90b5d582d"
+            ]
+        ]
+    },
+    {
+        "id": "e8480b9f2eed06b2",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "debug 17",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 500,
+        "y": 1220,
+        "wires": []
+    },
+    {
+        "id": "f1bd54c3cc374b37",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "Update Mic-E",
+        "props": [
+            {
+                "p": "payload.type",
+                "v": "Mic-E",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 160,
+        "y": 1000,
+        "wires": [
+            [
+                "0ca784caae8fb8b9"
+            ]
+        ]
+    },
+    {
+        "id": "370df484f8b7ab9a",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "Update Standard",
+        "props": [
+            {
+                "p": "payload.type",
+                "v": "regular",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 170,
+        "y": 1160,
+        "wires": [
+            [
+                "0ca784caae8fb8b9"
+            ]
+        ]
+    },
+    {
+        "id": "a2cc1e9691020d91",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "Update Compressed",
+        "props": [
+            {
+                "p": "payload.type",
+                "v": "compressed",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 180,
+        "y": 1040,
+        "wires": [
+            [
+                "0ca784caae8fb8b9"
+            ]
+        ]
+    },
+    {
+        "id": "3007591d76581ae8",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "Update Message",
+        "props": [
+            {
+                "p": "payload.type",
+                "v": "message",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 170,
+        "y": 1080,
+        "wires": [
+            [
+                "0ca784caae8fb8b9"
+            ]
+        ]
+    },
+    {
+        "id": "0f964c429239bfb0",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "Update Object",
+        "props": [
+            {
+                "p": "payload.type",
+                "v": "object",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 160,
+        "y": 1120,
+        "wires": [
+            [
+                "0ca784caae8fb8b9"
+            ]
+        ]
+    },
+    {
+        "id": "82fac87a5be841d8",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "Update Status",
+        "props": [
+            {
+                "p": "payload.type",
+                "v": "status",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 160,
+        "y": 1200,
+        "wires": [
+            [
+                "0ca784caae8fb8b9"
+            ]
+        ]
+    },
+    {
+        "id": "b4312e8460d43366",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "Update Third party",
+        "props": [
+            {
+                "p": "payload.type",
+                "v": "thirdparty",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 180,
+        "y": 1240,
+        "wires": [
+            [
+                "0ca784caae8fb8b9"
+            ]
+        ]
+    },
+    {
+        "id": "360782738ff9da20",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "Update Undefined",
+        "props": [
+            {
+                "p": "payload.type",
+                "v": "undefined",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 170,
+        "y": 1280,
+        "wires": [
+            [
+                "0ca784caae8fb8b9"
+            ]
+        ]
+    },
+    {
+        "id": "9bb516a32777a774",
+        "type": "ui-table",
+        "z": "f6f2187d.f17ca8",
+        "group": "49255b61efa2001e",
+        "name": "Mic-E Packets",
+        "label": "text",
+        "order": 1,
+        "width": "12",
+        "height": "1",
+        "maxrows": "10",
+        "passthru": false,
+        "autocols": false,
+        "showSearch": false,
+        "selectionType": "none",
+        "columns": [
+            {
+                "title": "Sender",
+                "key": "callsign",
+                "keyType": "key",
+                "type": "text",
+                "width": "30px",
+                "align": "start"
+            },
+            {
+                "title": "Last Heard",
+                "key": "last_heard",
+                "keyType": "key",
+                "type": "text",
+                "width": "260px",
+                "align": "start"
+            },
+            {
+                "title": "Comment",
+                "key": "last_payload.comment",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "start"
+            },
+            {
+                "title": "Latitude",
+                "key": "last_payload.lat",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "start"
+            },
+            {
+                "title": "Longitude",
+                "key": "last_payload.lon",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "start"
+            },
+            {
+                "title": "Speed",
+                "key": "last_payload.speed",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "start"
+            },
+            {
+                "title": "Device",
+                "key": "last_payload.device.device",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "start"
+            },
+            {
+                "title": "Path",
+                "key": "last_payload.path",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "start"
+            },
+            {
+                "title": "Packet Type",
+                "key": "last_payload.type",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "start"
+            },
+            {
+                "title": "Received Count",
+                "key": "daily_count",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "start"
+            }
+        ],
+        "mobileBreakpoint": "sm",
+        "mobileBreakpointType": "defaults",
+        "action": "replace",
+        "x": 960,
+        "y": 980,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4db90f74bf35e0b4",
+        "type": "ui-table",
+        "z": "f6f2187d.f17ca8",
+        "group": "be612966e8b660f2",
+        "name": "Compressed Packets",
+        "label": "text",
+        "order": 1,
+        "width": "12",
+        "height": "1",
+        "maxrows": "10",
+        "passthru": false,
+        "autocols": false,
+        "showSearch": false,
+        "selectionType": "none",
+        "columns": [
+            {
+                "title": "Sender",
+                "key": "callsign",
+                "keyType": "key",
+                "type": "text",
+                "width": "30px",
+                "align": "start"
+            },
+            {
+                "title": "Last Heard",
+                "key": "last_heard",
+                "keyType": "key",
+                "type": "text",
+                "width": "260px",
+                "align": "start"
+            },
+            {
+                "title": "Comment",
+                "key": "last_payload.comment",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "start"
+            },
+            {
+                "title": "Latitude",
+                "key": "last_payload.lat",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "start"
+            },
+            {
+                "title": "Longitude",
+                "key": "last_payload.lon",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "start"
+            },
+            {
+                "title": "Path",
+                "key": "last_payload.path",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "start"
+            },
+            {
+                "title": "Packet Type",
+                "key": "last_payload.type",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "start"
+            },
+            {
+                "title": "Received Count",
+                "key": "daily_count",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "start"
+            }
+        ],
+        "mobileBreakpoint": "sm",
+        "mobileBreakpointType": "defaults",
+        "action": "replace",
+        "x": 980,
+        "y": 1020,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a1c3093ea2c03919",
+        "type": "ui-table",
+        "z": "f6f2187d.f17ca8",
+        "group": "ee31f4063a0921a1",
+        "name": "Message Packets",
+        "label": "text",
+        "order": 1,
+        "width": "12",
+        "height": "1",
+        "maxrows": "10",
+        "passthru": false,
+        "autocols": false,
+        "showSearch": false,
+        "selectionType": "none",
+        "columns": [
+            {
+                "title": "Sender",
+                "key": "callsign",
+                "keyType": "key",
+                "type": "text",
+                "width": "30px",
+                "align": "start"
+            },
+            {
+                "title": "Last Heard",
+                "key": "last_heard",
+                "keyType": "key",
+                "type": "text",
+                "width": "260px",
+                "align": "start"
+            },
+            {
+                "title": "Message To",
+                "key": "last_payload.adressee",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "start"
+            },
+            {
+                "title": "Message",
+                "key": "last_payload.message",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "start"
+            },
+            {
+                "title": "Path",
+                "key": "last_payload.path",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "start"
+            },
+            {
+                "title": "Packet Type",
+                "key": "last_payload.type",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "start"
+            },
+            {
+                "title": "Received Count",
+                "key": "daily_count",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "start"
+            }
+        ],
+        "mobileBreakpoint": "sm",
+        "mobileBreakpointType": "defaults",
+        "action": "replace",
+        "x": 970,
+        "y": 1060,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ef2803db860f9754",
+        "type": "ui-table",
+        "z": "f6f2187d.f17ca8",
+        "group": "58b8be10f4f8c78c",
+        "name": "Object Packets",
+        "label": "text",
+        "order": 1,
+        "width": "12",
+        "height": "1",
+        "maxrows": "10",
+        "passthru": false,
+        "autocols": false,
+        "showSearch": false,
+        "selectionType": "none",
+        "columns": [
+            {
+                "title": "Sender",
+                "key": "callsign",
+                "keyType": "key",
+                "type": "text",
+                "width": "30px",
+                "align": "start"
+            },
+            {
+                "title": "Last Heard",
+                "key": "last_heard",
+                "keyType": "key",
+                "type": "text",
+                "width": "260px",
+                "align": "start"
+            },
+            {
+                "title": "Comment",
+                "key": "last_payload.comment",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "start"
+            },
+            {
+                "title": "Latitude",
+                "key": "last_payload.lat",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "start"
+            },
+            {
+                "title": "Longitude",
+                "key": "last_payload.lon",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "start"
+            },
+            {
+                "title": "Object Text",
+                "key": "last_payload.object",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "start"
+            },
+            {
+                "title": "Path",
+                "key": "last_payload.path",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "start"
+            },
+            {
+                "title": "Packet Type",
+                "key": "last_payload.type",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "start"
+            },
+            {
+                "title": "Received Count",
+                "key": "daily_count",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "start"
+            }
+        ],
+        "mobileBreakpoint": "sm",
+        "mobileBreakpointType": "defaults",
+        "action": "replace",
+        "x": 960,
+        "y": 1100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "662570d17fc86868",
+        "type": "ui-table",
+        "z": "f6f2187d.f17ca8",
+        "group": "1807b06721f1fef0",
+        "name": "Status Packets",
+        "label": "text",
+        "order": 1,
+        "width": "12",
+        "height": "1",
+        "maxrows": "10",
+        "passthru": false,
+        "autocols": false,
+        "showSearch": false,
+        "selectionType": "none",
+        "columns": [
+            {
+                "title": "Sender",
+                "key": "callsign",
+                "keyType": "key",
+                "type": "text",
+                "width": "30px",
+                "align": "start"
+            },
+            {
+                "title": "Last Heard",
+                "key": "last_heard",
+                "keyType": "key",
+                "type": "text",
+                "width": "260px",
+                "align": "start"
+            },
+            {
+                "title": "Comment",
+                "key": "last_payload.comment",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "start"
+            },
+            {
+                "title": "Path",
+                "key": "last_payload.path",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "start"
+            },
+            {
+                "title": "Packet Type",
+                "key": "last_payload.type",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "start"
+            },
+            {
+                "title": "Received Count",
+                "key": "daily_count",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "start"
+            }
+        ],
+        "mobileBreakpoint": "sm",
+        "mobileBreakpointType": "defaults",
+        "action": "replace",
+        "x": 960,
+        "y": 1180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "128559ac8f0f03b4",
+        "type": "ui-table",
+        "z": "f6f2187d.f17ca8",
+        "group": "a19911e5a9d88202",
+        "name": "Third Party Packets",
+        "label": "text",
+        "order": 1,
+        "width": "12",
+        "height": "1",
+        "maxrows": "10",
+        "passthru": false,
+        "autocols": false,
+        "showSearch": false,
+        "selectionType": "none",
+        "columns": [
+            {
+                "title": "Sender",
+                "key": "callsign",
+                "keyType": "key",
+                "type": "text",
+                "width": "30px",
+                "align": "start"
+            },
+            {
+                "title": "Last Heard",
+                "key": "last_heard",
+                "keyType": "key",
+                "type": "text",
+                "width": "260px",
+                "align": "start"
+            },
+            {
+                "title": "Relay For",
+                "key": "last_payload.data.source",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "start"
+            },
+            {
+                "title": "Relay To",
+                "key": "last_payload.data.destination",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "start"
+            },
+            {
+                "title": "Relay Packet Type",
+                "key": "last_payload.data.type",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "start"
+            },
+            {
+                "title": "Path",
+                "key": "last_payload.path",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "start"
+            },
+            {
+                "title": "Packet Type",
+                "key": "last_payload.type",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "start"
+            },
+            {
+                "title": "Received Count",
+                "key": "daily_count",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "start"
+            }
+        ],
+        "mobileBreakpoint": "sm",
+        "mobileBreakpointType": "defaults",
+        "action": "replace",
+        "x": 980,
+        "y": 1220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6a176cca42f6e7c2",
+        "type": "ui-table",
+        "z": "f6f2187d.f17ca8",
+        "group": "f799688ffe40fab7",
+        "name": "Undefined Packets",
+        "label": "text",
+        "order": 1,
+        "width": "12",
+        "height": "1",
+        "maxrows": "10",
+        "passthru": false,
+        "autocols": false,
+        "showSearch": false,
+        "selectionType": "none",
+        "columns": [
+            {
+                "title": "Sender",
+                "key": "callsign",
+                "keyType": "key",
+                "type": "text",
+                "width": "30px",
+                "align": "start"
+            },
+            {
+                "title": "Last Heard",
+                "key": "last_heard",
+                "keyType": "key",
+                "type": "text",
+                "width": "260px",
+                "align": "start"
+            },
+            {
+                "title": "Path",
+                "key": "last_payload.path",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "start"
+            },
+            {
+                "title": "Received Count",
+                "key": "daily_count",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "start"
+            }
+        ],
+        "mobileBreakpoint": "sm",
+        "mobileBreakpointType": "defaults",
+        "action": "replace",
+        "x": 970,
+        "y": 1260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "dd65d1127971bdc1",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "debug 18",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 620,
+        "y": 1440,
+        "wires": []
+    },
+    {
+        "id": "bab3f06ee77c0225",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "function 2",
+        "func": "const current_timestamp = Date.now() / 1000;\nlet msg_type = msg.payload.type\nconst bulk_calls_orig = flow.get('aprs_' + msg_type);\nconst bulk_calls = bulk_calls_orig.slice();\n\n\nfor (let i = 0; i < bulk_calls.length; i++) { // Loop Each Station\n    \n    let check_timestamp = bulk_calls[i].last_heard;\n    let this_new_last_heard = [];\n\n    for (let j = 0; j < check_timestamp.length; j++) {  // Loop Each Timestamp\n        let old_timestamp = (check_timestamp[j] / 1000);\n        let timestamp_age = parseInt((current_timestamp - old_timestamp) / 86400);\n        \n        if (timestamp_age < 1){\n            this_new_last_heard.push(check_timestamp[j]);\n        } else {\n            msg.payload = bulk_calls[i].source + ' -> Removed #[' + j + '] ' + old_timestamp + ' ' + timestamp_age + '.';\n            node.send(msg);\n        }\n    }\n\n        bulk_calls[i].last_heard = this_new_last_heard;\n        bulk_calls[i].daily_count = this_new_last_heard.length;    \n\n}\n\nmsg.payload = bulk_calls;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 1440,
+        "wires": [
+            [
+                "dd65d1127971bdc1"
+            ]
+        ]
+    },
+    {
+        "id": "72d7e0808fc20178",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "Update Message",
+        "props": [
+            {
+                "p": "payload.type",
+                "v": "message",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 180,
+        "y": 1420,
+        "wires": [
+            [
+                "bab3f06ee77c0225"
+            ]
+        ]
+    },
+    {
+        "id": "e873cae73e920cf9",
+        "type": "ui-button-group",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "group": "48246e60360de97d",
+        "order": 1,
+        "width": "12",
+        "height": 1,
+        "label": "Packets",
+        "className": "",
+        "rounded": true,
+        "useThemeColors": true,
+        "passthru": true,
+        "options": [
+            {
+                "label": "Most Recent",
+                "icon": "",
+                "value": "latest",
+                "valueType": "str",
+                "color": "#99ff66"
+            },
+            {
+                "label": "Standard",
+                "icon": "",
+                "value": "standard",
+                "valueType": "str",
+                "color": "#cccc00"
+            },
+            {
+                "label": "Mic-E",
+                "icon": "",
+                "value": "mic_e",
+                "valueType": "str",
+                "color": "#009933"
+            },
+            {
+                "label": "Compressed",
+                "icon": "",
+                "value": "compressed",
+                "valueType": "str",
+                "color": "#999999"
+            },
+            {
+                "label": "Message",
+                "icon": "",
+                "value": "message",
+                "valueType": "str",
+                "color": "#ff6666"
+            },
+            {
+                "label": "Object",
+                "icon": "",
+                "value": "object",
+                "valueType": "str",
+                "color": "#009999"
+            },
+            {
+                "label": "Status",
+                "icon": "",
+                "value": "status",
+                "valueType": "str",
+                "color": "#ff33cc"
+            },
+            {
+                "label": "Third Party",
+                "icon": "",
+                "value": "third_party",
+                "valueType": "str",
+                "color": "#cc6600"
+            },
+            {
+                "label": "Undefined",
+                "icon": "",
+                "value": "undefined",
+                "valueType": "str",
+                "color": "#99ff66"
+            },
+            {
+                "label": "All",
+                "icon": "",
+                "value": "all",
+                "valueType": "str",
+                "color": "#660033"
+            }
+        ],
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 640,
+        "y": 940,
+        "wires": [
+            [
+                "ce07e0c4d0db2297"
+            ]
+        ]
+    },
+    {
+        "id": "6e891333b4789fc7",
+        "type": "ui-control",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "ui": "6f0712abd452c769",
+        "events": "all",
+        "x": 640,
+        "y": 1000,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "52243eca94fe3e13",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "latest",
+        "payloadType": "str",
+        "x": 490,
+        "y": 940,
+        "wires": [
+            [
+                "e873cae73e920cf9"
+            ]
+        ]
+    },
+    {
+        "id": "ce07e0c4d0db2297",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "function 5",
+        "func": "let switch_option = msg.payload;\n\nlet all_groups = ['APRS Basic:Mic-Encoded Packets',\n                        'APRS Basic:Compressed Packets',\n                        'APRS Basic:Message Packets',\n                        'APRS Basic:Object Packets',\n                        'APRS Basic:Standard Packets',\n                        'APRS Basic:Status Packets',\n                        'APRS Basic:Third Party Packets',\n                        'APRS Basic:Undefined Packets',\n                        'APRS Basic:Latest Packets'];\n\n\nmsg.payload = {groups: {hide: all_groups}}\nnode.send(msg);\n\n\n\nlet show_group = [];\nif (switch_option === 'all'){show_group = all_groups;}\nif (switch_option === 'mic_e'){show_group.push('APRS Basic:Mic-Encoded Packets');}\nif (switch_option === 'compressed'){show_group.push('APRS Basic:Compressed Packets');}\nif (switch_option === 'message'){show_group.push('APRS Basic:Message Packets');}\nif (switch_option === 'object'){show_group.push('APRS Basic:Object Packets');}\nif (switch_option === 'standard'){show_group.push('APRS Basic:Standard Packets');}\nif (switch_option === 'status'){show_group.push('APRS Basic:Status Packets');}\nif (switch_option === 'third_party'){show_group.push('APRS Basic:Third Party Packets');}\nif (switch_option === 'undefined'){show_group.push('APRS Basic:Undefined Packets');}\nif (switch_option === 'latest'){show_group.push('APRS Basic:Latest Packets');}\n\nmsg.payload = {groups: {show: show_group}};\nreturn msg;\n\n//if (msg.payload === 'all'){\n//        match_found = true;\n//        msg.payload = {\n//            groups: {\n//                show: ['APRS Basic:Mic-Encoded Packets',\n//                        'APRS Basic:Compressed Packets',\n//                        'APRS Basic:Message Packets',\n//                        'APRS Basic:Object Packets',\n//                        'APRS Basic:Standard Packets',\n//                        'APRS Basic:Status Packets',\n//                        'APRS Basic:Third Party Packets',\n//                        'APRS Basic:Undefined Packets'\n//                        ],\n//                enable: ['APRS Basic:Mic-Encoded Packets',\n//                        'APRS Basic:Compressed Packets',\n//                        'APRS Basic:Message Packets',\n//                        'APRS Basic:Object Packets',\n//                        'APRS Basic:Standard Packets',\n//                        'APRS Basic:Status Packets',\n//                        'APRS Basic:Third Party Packets',\n//                        'APRS Basic:Undefined Packets'\n//                        ]\n//            }\n//        }\n//}\n\n//if (match_found){return msg;} else {return;}\n\n\n\n//msg.payload = {\n//    groups: {\n//        hide: [ 'APRS Basic:Mic-Encoded Packets',\n//                'APRS Basic:Compressed Packets',\n//                'APRS Basic:Message Packets',\n//                'APRS Basic:Object Packets',\n//                'APRS Basic:Standard Packets',\n//                'APRS Basic:Status Packets',\n//                'APRS Basic:Third Party Packets',\n//                'APRS Basic:Undefined Packets'\n//                ]\n//    }\n//}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 1000,
+        "wires": [
+            [
+                "6e891333b4789fc7"
+            ]
+        ]
+    },
+    {
+        "id": "1809e84f64be8f97",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "function 6",
+        "func": "if (flow.get('aprs_last_heard') === undefined){flow.set('aprs_last_heard',[]);}\n\nlet last_heard_history = flow.get('aprs_last_heard');\nlet max_len = 10;\n\nif (last_heard_history.length >= max_len){last_heard_history.pop()}\nif (msg.payload.raw !== undefined){msg.payload.raw = '';}\nif (msg.payload.lat !== undefined){msg.payload.lat = (msg.payload.lat).toFixed(4);}\nif (msg.payload.lon !== undefined){msg.payload.lon = (msg.payload.lon).toFixed(4);}\n\nif (msg.payload.message !== undefined && msg.payload.comment === undefined){\n        msg.payload.comment = msg.payload.message;\n}\n\nlet old_payload = msg.payload;\nlet new_payload = {};\n    new_payload.source = old_payload.source;\n    new_payload.last_heard = Date.now();\n    new_payload.payload = old_payload;\n\n\n\nlast_heard_history.unshift (new_payload);\n\nmsg.payload = last_heard_history;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 860,
+        "y": 460,
+        "wires": [
+            [
+                "4671d2786d76c03e"
+            ]
+        ]
+    },
+    {
+        "id": "4671d2786d76c03e",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "debug 19",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1020,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "ae1e29b0854ac99c",
+        "type": "ui-table",
+        "z": "f6f2187d.f17ca8",
+        "group": "4c9a6c10f917f64f",
+        "name": "Last Heard Packets",
+        "label": "text",
+        "order": 1,
+        "width": "12",
+        "height": "1",
+        "maxrows": "10",
+        "passthru": false,
+        "autocols": false,
+        "showSearch": false,
+        "selectionType": "none",
+        "columns": [
+            {
+                "title": "Sender",
+                "key": "callsign",
+                "keyType": "key",
+                "type": "text",
+                "width": "30px",
+                "align": "start"
+            },
+            {
+                "title": "Last Heard",
+                "key": "last_heard",
+                "keyType": "key",
+                "type": "text",
+                "width": "260px",
+                "align": "start"
+            },
+            {
+                "title": "Packet Type",
+                "key": "last_payload.type",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "start"
+            },
+            {
+                "title": "Path",
+                "key": "last_payload.path",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "start"
+            },
+            {
+                "title": "Latitude",
+                "key": "last_payload.lat",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "start"
+            },
+            {
+                "title": "Longitude",
+                "key": "last_payload.lon",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "start"
+            },
+            {
+                "title": "Comment",
+                "key": "last_payload.comment",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "start"
+            }
+        ],
+        "mobileBreakpoint": "sm",
+        "mobileBreakpointType": "defaults",
+        "action": "replace",
+        "x": 970,
+        "y": 1300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fe27389ea30e679d",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "Update Last Heard",
+        "props": [
+            {
+                "p": "payload.type",
+                "v": "last_heard",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 180,
+        "y": 1320,
+        "wires": [
+            [
+                "0ca784caae8fb8b9"
+            ]
+        ]
+    },
+    {
+        "id": "205c7c193f39af29",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "Break Into Types",
+        "func": "let device_type_alarm = [];\nlet device_type_temp = [];\nlet device_type_tpms = [];\nlet device_type_other = [];\nlet device_type_all = [];\n\nlet ism_data_array = msg.payload;\n\n    // Pull Timestamp From Orig. Array\n    for (let i = 0; i < ism_data_array.length; i++) {\n        device_type_all.push(ism_data_array[i]);    // Save all to array also.\n        let match = false;\n        let data = ism_data_array[i];\n            if (data.payload.tamper !== undefined){device_type_alarm.push(data); match = true;} // Alarm\n            if (data.payload.temperature_C !== undefined && data.payload.type !== 'TPMS') { device_type_temp.push(data); match = true;} // Temp\n            if (data.payload.type === 'TPMS') { device_type_tpms.push(data); match = true; } // TPMS Device\n            \n        if (!match){device_type_other.push(ism_data_array[i]);}\n    } \n\n    msg.payload = {};\n    msg.payload.alarm = device_type_alarm;\n    msg.payload.temp = device_type_temp;\n    msg.payload.tpms = device_type_tpms;\n    msg.payload.other = device_type_other;\n    \n\n\nreturn msg;\n\n\n\n//return msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 870,
+        "y": 300,
+        "wires": [
+            [
+                "177ab48be244f243",
+                "9440e3e7eef754c9",
+                "8a0761c0b1f6b8a5",
+                "97c8c8b5bd6db02c",
+                "43164c2b84e42407"
+            ]
+        ]
+    },
+    {
+        "id": "177ab48be244f243",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "debug 20",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 880,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "5750141e573bc49d",
+        "type": "ui-button-group",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "group": "2989e8d7261b6848",
+        "order": 1,
+        "width": "12",
+        "height": 1,
+        "label": "Packets",
+        "className": "",
+        "rounded": true,
+        "useThemeColors": true,
+        "passthru": true,
+        "options": [
+            {
+                "label": "All",
+                "icon": "",
+                "value": "all",
+                "valueType": "str",
+                "color": "#ff33cc"
+            },
+            {
+                "label": "Alarm",
+                "icon": "",
+                "value": "alarm",
+                "valueType": "str",
+                "color": "#99ff66"
+            },
+            {
+                "label": "Temperature",
+                "icon": "",
+                "value": "temp",
+                "valueType": "str",
+                "color": "#999999"
+            },
+            {
+                "label": "TPMS",
+                "icon": "",
+                "value": "tpms",
+                "valueType": "str",
+                "color": "#009999"
+            },
+            {
+                "label": "Other",
+                "icon": "",
+                "value": "other",
+                "valueType": "str",
+                "color": "#ff33cc"
+            }
+        ],
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 980,
+        "y": 60,
+        "wires": [
+            [
+                "c842e56d6291707f"
+            ]
+        ]
+    },
+    {
+        "id": "7054865e9eb42f45",
+        "type": "ui-control",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "ui": "6f0712abd452c769",
+        "events": "all",
+        "x": 980,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4b1e6171b4120346",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "temp",
+        "payloadType": "str",
+        "x": 830,
+        "y": 60,
+        "wires": [
+            [
+                "5750141e573bc49d"
+            ]
+        ]
+    },
+    {
+        "id": "c842e56d6291707f",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "function 7",
+        "func": "let switch_option = msg.payload;\n\nlet all_groups = ['ISM Decoded Data:Alarm Packets',\n                        'ISM Decoded Data:Temperature Packets',\n                        'ISM Decoded Data:TPMS Packets',\n                        'ISM Decoded Data:Other Packets',\n                ];\n\n\nmsg.payload = {groups: {hide: all_groups}}\nnode.send(msg);\n\n\n\nlet show_group = [];\nif (switch_option === 'all'){show_group = all_groups;}\nif (switch_option === 'alarm'){show_group.push('APRS Basic:Alarm Packets');}\nif (switch_option === 'temp'){show_group.push('APRS Basic:Temperature Packets');}\nif (switch_option === 'tpms'){show_group.push('APRS Basic:TPMS Packets');}\nif (switch_option === 'other'){show_group.push('APRS Basic:Other Packets');}\n\n\nmsg.payload = {groups: {show: show_group}};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 840,
+        "y": 100,
+        "wires": [
+            [
+                "7054865e9eb42f45"
+            ]
+        ]
+    },
+    {
+        "id": "7292b8e5d955dd44",
+        "type": "ui-table",
+        "z": "f6f2187d.f17ca8",
+        "group": "3ef504fb3dc48d59",
+        "name": "Alarm Packets",
+        "label": "text",
+        "order": 1,
+        "width": "12",
+        "height": "1",
+        "maxrows": "10",
+        "passthru": false,
+        "autocols": false,
+        "showSearch": false,
+        "selectionType": "none",
+        "columns": [
+            {
+                "title": "Age",
+                "key": "time_diff_string",
+                "keyType": "key",
+                "type": "text",
+                "width": "200px",
+                "align": "start"
+            },
+            {
+                "title": "Device ID",
+                "key": "payload.model",
+                "keyType": "key",
+                "type": "text",
+                "width": "150px",
+                "align": "start"
+            },
+            {
+                "title": "ESN",
+                "key": "payload.esn",
+                "keyType": "key",
+                "type": "text",
+                "width": "50px",
+                "align": "start"
+            },
+            {
+                "title": "Closed",
+                "key": "payload.closed",
+                "keyType": "key",
+                "type": "text",
+                "width": "50px",
+                "align": "start"
+            },
+            {
+                "title": "Status Code",
+                "key": "payload.status",
+                "keyType": "key",
+                "type": "text",
+                "width": "150px",
+                "align": "start"
+            },
+            {
+                "title": "Event",
+                "key": "payload.event",
+                "keyType": "key",
+                "type": "text",
+                "width": "50px",
+                "align": "start"
+            },
+            {
+                "title": "Tamper",
+                "key": "payload.tamper",
+                "keyType": "key",
+                "type": "text",
+                "width": "50px",
+                "align": "start"
+            }
+        ],
+        "mobileBreakpoint": "sm",
+        "mobileBreakpointType": "defaults",
+        "action": "replace",
+        "x": 1280,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9440e3e7eef754c9",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "Alarm",
+        "func": "let output = msg.payload.alarm;\nmsg.payload = output;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1130,
+        "y": 260,
+        "wires": [
+            [
+                "7292b8e5d955dd44"
+            ]
+        ]
+    },
+    {
+        "id": "8a0761c0b1f6b8a5",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "Temperature",
+        "func": "let output = msg.payload.temp;\n\n\n    for (let i = 0; i < output.length; i++) {\n        output[i].payload.freq = output[i].payload.freq / 1000000\n        \n        if (output[i].payload.temperature_C !== undefined){ output[i].payload.temperature_F = (output[i].payload.temperature_C +32 * 9 /5); }\n        }\n\n\nmsg.payload = output;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1110,
+        "y": 220,
+        "wires": [
+            [
+                "836ed8f15530eedf"
+            ]
+        ]
+    },
+    {
+        "id": "97c8c8b5bd6db02c",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "TPMS",
+        "func": "let output = msg.payload.tpms;\n\n    for (let i = 0; i < output.length; i++) {\n\n        output[i].payload.freq = output[i].payload.freq / 1000000\n\n        if (output[i].payload.temperature_C !== undefined){\n            output[i].payload.temperature_F = (output[i].payload.temperature_C +32 * 9 /5);\n        }\n        \n\n        if (output[i].payload.pressure_PSI !== undefined){\n            output[i].payload.pressure_kPa = parseInt(output[i].payload.pressure_PSI * 6.895)\n        }\n        else {\n            output[i].payload.pressure_kPa = parseInt(output[i].payload.pressure_kPa);\n            output[i].payload.pressure_PSI = parseInt(output[i].payload.pressure_kPa / 6.895);\n        }\n    }\n\nmsg.payload = output;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1130,
+        "y": 300,
+        "wires": [
+            [
+                "66885d43363fa6dd"
+            ]
+        ]
+    },
+    {
+        "id": "836ed8f15530eedf",
+        "type": "ui-table",
+        "z": "f6f2187d.f17ca8",
+        "group": "dc0edaa1bd853262",
+        "name": "Temperature Packets",
+        "label": "text",
+        "order": 1,
+        "width": "12",
+        "height": "1",
+        "maxrows": "10",
+        "passthru": false,
+        "autocols": false,
+        "showSearch": false,
+        "selectionType": "none",
+        "columns": [
+            {
+                "title": "Age",
+                "key": "time_diff_string",
+                "keyType": "key",
+                "type": "text",
+                "width": "200px",
+                "align": "start"
+            },
+            {
+                "title": "Frequency",
+                "key": "payload.freq",
+                "keyType": "key",
+                "type": "text",
+                "width": "50px",
+                "align": "start"
+            },
+            {
+                "title": "Device ID",
+                "key": "payload.model",
+                "keyType": "key",
+                "type": "text",
+                "width": "150px",
+                "align": "start"
+            },
+            {
+                "title": "Device ID",
+                "key": "payload.id",
+                "keyType": "key",
+                "type": "text",
+                "width": "50px",
+                "align": "start"
+            },
+            {
+                "title": "Channel",
+                "key": "payload.channel",
+                "keyType": "key",
+                "type": "text",
+                "width": "50px",
+                "align": "start"
+            },
+            {
+                "title": "Battery Status",
+                "key": "payload.battery_ok",
+                "keyType": "key",
+                "type": "text",
+                "width": "150px",
+                "align": "start"
+            },
+            {
+                "title": "Temperature C",
+                "key": "payload.temperature_C",
+                "keyType": "key",
+                "type": "text",
+                "width": "75px",
+                "align": "start"
+            },
+            {
+                "title": "Temperature F",
+                "key": "payload.temperature_F",
+                "keyType": "key",
+                "type": "text",
+                "width": "75px",
+                "align": "start"
+            },
+            {
+                "title": "Humidity",
+                "key": "payload.humidity",
+                "keyType": "key",
+                "type": "text",
+                "width": "50px",
+                "align": "start"
+            }
+        ],
+        "mobileBreakpoint": "sm",
+        "mobileBreakpointType": "defaults",
+        "action": "replace",
+        "x": 1300,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "66885d43363fa6dd",
+        "type": "ui-table",
+        "z": "f6f2187d.f17ca8",
+        "group": "d06233195f212c63",
+        "name": "Tire Pressure Monitoring System",
+        "label": "text",
+        "order": 1,
+        "width": "12",
+        "height": "1",
+        "maxrows": "10",
+        "passthru": false,
+        "autocols": false,
+        "showSearch": false,
+        "selectionType": "none",
+        "columns": [
+            {
+                "title": "Age",
+                "key": "time_diff_string",
+                "keyType": "key",
+                "type": "text",
+                "width": "200px",
+                "align": "start"
+            },
+            {
+                "title": "Frequency",
+                "key": "payload.freq",
+                "keyType": "key",
+                "type": "text",
+                "width": "50px",
+                "align": "start"
+            },
+            {
+                "title": "Device ID",
+                "key": "payload.model",
+                "keyType": "key",
+                "type": "text",
+                "width": "225px",
+                "align": "start"
+            },
+            {
+                "title": "Device ID",
+                "key": "payload.id",
+                "keyType": "key",
+                "type": "text",
+                "width": "100px",
+                "align": "start"
+            },
+            {
+                "title": "State",
+                "key": "payload.state",
+                "keyType": "key",
+                "type": "text",
+                "width": "50px",
+                "align": "start"
+            },
+            {
+                "title": "Flags",
+                "key": "payload.flags",
+                "keyType": "key",
+                "type": "text",
+                "width": "150px",
+                "align": "start"
+            },
+            {
+                "title": "Temp. C",
+                "key": "payload.temperature_C",
+                "keyType": "key",
+                "type": "text",
+                "width": "100px",
+                "align": "start"
+            },
+            {
+                "title": "Temp. F",
+                "key": "payload.temperature_F",
+                "keyType": "key",
+                "type": "text",
+                "width": "100px",
+                "align": "start"
+            },
+            {
+                "title": "Pressure kPa",
+                "key": "payload.pressure_kPa",
+                "keyType": "key",
+                "type": "text",
+                "width": "100px",
+                "align": "start"
+            },
+            {
+                "title": "Pressure PSI",
+                "key": "payload.pressure_PSI",
+                "keyType": "key",
+                "type": "text",
+                "width": "100px",
+                "align": "start"
+            },
+            {
+                "title": "Battery(?)",
+                "key": "payload.maybe_battery",
+                "keyType": "key",
+                "type": "text",
+                "width": "100px",
+                "align": "start"
+            }
+        ],
+        "mobileBreakpoint": "sm",
+        "mobileBreakpointType": "defaults",
+        "action": "replace",
+        "x": 1340,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "51b8d3c1d4d5dd0f",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "Reload",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "5",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 600,
+        "y": 280,
+        "wires": [
+            [
+                "7e3ebae0f05cb487"
+            ]
+        ]
+    },
+    {
+        "id": "43164c2b84e42407",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "Other",
+        "func": "let output = msg.payload.other;\n\nmsg.payload = output;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1130,
+        "y": 340,
+        "wires": [
+            [
+                "2480da4c89605127"
+            ]
+        ]
+    },
+    {
+        "id": "2480da4c89605127",
+        "type": "ui-table",
+        "z": "f6f2187d.f17ca8",
+        "group": "6ccd6ba18ae9d354",
+        "name": "Other",
+        "label": "text",
+        "order": 1,
+        "width": "12",
+        "height": "1",
+        "maxrows": "10",
+        "passthru": false,
+        "autocols": false,
+        "showSearch": false,
+        "selectionType": "none",
+        "columns": [
+            {
+                "title": "Age",
+                "key": "time_diff_string",
+                "keyType": "key",
+                "type": "text",
+                "width": "200px",
+                "align": "start"
+            },
+            {
+                "title": "Device ID",
+                "key": "payload.model",
+                "keyType": "key",
+                "type": "text",
+                "width": "225px",
+                "align": "start"
+            },
+            {
+                "title": "Device ID",
+                "key": "payload.id",
+                "keyType": "key",
+                "type": "text",
+                "width": "100px",
+                "align": "start"
+            },
+            {
+                "title": "Payload",
+                "key": "payload",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "start"
+            }
+        ],
+        "mobileBreakpoint": "sm",
+        "mobileBreakpointType": "defaults",
+        "action": "replace",
+        "x": 1250,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "268e0aec2a6041ad",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "debug 21",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.message",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 900,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "815ecc9b769bd4da",
+        "type": "switch",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "property": "payload.message",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nnull"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 770,
+        "y": 740,
+        "wires": [
+            [
+                "268e0aec2a6041ad"
+            ]
+        ]
+    },
+    {
+        "id": "50d670c19684f1ed",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "debug 26",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 620,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "a3b175badaf0c377",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "192.168.0.117",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "48246e60360de97d",
+        "type": "ui-group",
+        "name": "Basic APRS Info",
+        "page": "7f81aef9717b46f6",
+        "width": "12",
+        "height": "1",
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "72fcbdd61d0961be",
+        "type": "ui-group",
+        "name": "Standard Packets",
+        "page": "7f81aef9717b46f6",
+        "width": "12",
+        "height": "1",
+        "order": 6,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "49255b61efa2001e",
+        "type": "ui-group",
+        "name": "Mic-Encoded Packets",
+        "page": "7f81aef9717b46f6",
+        "width": "12",
+        "height": "1",
+        "order": 2,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "be612966e8b660f2",
+        "type": "ui-group",
+        "name": "Compressed Packets",
+        "page": "7f81aef9717b46f6",
+        "width": "12",
+        "height": "1",
+        "order": 3,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "ee31f4063a0921a1",
+        "type": "ui-group",
+        "name": "Message Packets",
+        "page": "7f81aef9717b46f6",
+        "width": "12",
+        "height": "1",
+        "order": 4,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "58b8be10f4f8c78c",
+        "type": "ui-group",
+        "name": "Object Packets",
+        "page": "7f81aef9717b46f6",
+        "width": "12",
+        "height": "1",
+        "order": 5,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "1807b06721f1fef0",
+        "type": "ui-group",
+        "name": "Status Packets",
+        "page": "7f81aef9717b46f6",
+        "width": "12",
+        "height": "1",
+        "order": 7,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "a19911e5a9d88202",
+        "type": "ui-group",
+        "name": "Third Party Packets",
+        "page": "7f81aef9717b46f6",
+        "width": "12",
+        "height": "1",
+        "order": 8,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "f799688ffe40fab7",
+        "type": "ui-group",
+        "name": "Undefined Packets",
+        "page": "7f81aef9717b46f6",
+        "width": "12",
+        "height": "1",
+        "order": 9,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "6f0712abd452c769",
+        "type": "ui-base",
+        "name": "My Dashboard",
+        "path": "/dashboard",
+        "appIcon": "",
+        "includeClientData": true,
+        "acceptsClientConfig": [
+            "ui-notification",
+            "ui-control"
+        ],
+        "showPathInSidebar": false,
+        "showPageTitle": true,
+        "navigationStyle": "default",
+        "titleBarStyle": "default"
+    },
+    {
+        "id": "4c9a6c10f917f64f",
+        "type": "ui-group",
+        "name": "Latest Packets",
+        "page": "7f81aef9717b46f6",
+        "width": "12",
+        "height": "1",
+        "order": 10,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "2989e8d7261b6848",
+        "type": "ui-group",
+        "name": "ISM Decoded Data",
+        "page": "24af65eecd97444f",
+        "width": "12",
+        "height": "1",
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "3ef504fb3dc48d59",
+        "type": "ui-group",
+        "name": "Alarm Packets",
+        "page": "24af65eecd97444f",
+        "width": "12",
+        "height": "1",
+        "order": 2,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "dc0edaa1bd853262",
+        "type": "ui-group",
+        "name": "Temperature Packets",
+        "page": "24af65eecd97444f",
+        "width": "12",
+        "height": "1",
+        "order": 3,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "d06233195f212c63",
+        "type": "ui-group",
+        "name": "TPMS Packets",
+        "page": "24af65eecd97444f",
+        "width": "12",
+        "height": "1",
+        "order": 5,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "6ccd6ba18ae9d354",
+        "type": "ui-group",
+        "name": "Other Packets",
+        "page": "24af65eecd97444f",
+        "width": "12",
+        "height": "1",
+        "order": 6,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "7f81aef9717b46f6",
+        "type": "ui-page",
+        "name": "APRS Basic",
+        "ui": "6f0712abd452c769",
+        "path": "/page2",
+        "icon": "home",
+        "layout": "grid",
+        "theme": "c25553fe09431bad",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": "0",
+                "cols": "3"
+            },
+            {
+                "name": "Tablet",
+                "px": "576",
+                "cols": "6"
+            },
+            {
+                "name": "Small Desktop",
+                "px": "768",
+                "cols": "9"
+            },
+            {
+                "name": "Desktop",
+                "px": "1024",
+                "cols": "12"
+            }
+        ],
+        "order": 2,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "24af65eecd97444f",
+        "type": "ui-page",
+        "name": "ISM Decoded Data",
+        "ui": "6f0712abd452c769",
+        "path": "/page1",
+        "icon": "home",
+        "layout": "grid",
+        "theme": "c25553fe09431bad",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": "0",
+                "cols": "3"
+            },
+            {
+                "name": "Tablet",
+                "px": "576",
+                "cols": "6"
+            },
+            {
+                "name": "Small Desktop",
+                "px": "768",
+                "cols": "9"
+            },
+            {
+                "name": "Desktop",
+                "px": "1024",
+                "cols": "12"
+            }
+        ],
+        "order": 1,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "c25553fe09431bad",
+        "type": "ui-theme",
+        "name": "Default Theme",
+        "colors": {
+            "surface": "#ffffff",
+            "primary": "#0094CE",
+            "bgPage": "#eeeeee",
+            "groupBg": "#ffffff",
+            "groupOutline": "#cccccc"
+        },
+        "sizes": {
+            "density": "default",
+            "pagePadding": "12px",
+            "groupGap": "12px",
+            "groupBorderRadius": "4px",
+            "widgetGap": "12px"
+        }
+    }
+]
